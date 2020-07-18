@@ -105,34 +105,34 @@ module top(
             if(vaddress > 244 && vaddress < 251) begin //Check the y address for printing floor/ground
                 layer[2] <= floor[vaddress-245][(haddress)+scrolladdr[7:0]];
             end
-            if (vaddress > 203 && vaddress < 250)begin
-                if(select[0])begin
-                    if(type[0])begin
-                        if((haddress + scrolladdr[9:0]) > 640 && (haddress + scrolladdr[9:0]) < 667)begin //Cactus test
+            if (vaddress > 203 && vaddress < 250)begin //Check the y address for printing obsticles
+                if(select[0])begin //Check if its valid to print the first cacti
+                    if(type[0])begin //Check which cacti to print
+                        if((haddress + scrolladdr[9:0]) > 640 && (haddress + scrolladdr[9:0]) < 667)begin
                             layer[1] <= cactus1[vaddress-203][haddress-640+scrolladdr[9:0]];
                         end
                     end
                     else begin
-                        if((haddress + scrolladdr[9:0]) > 640 && (haddress + scrolladdr[9:0]) < 667)begin //Cactus test
+                        if((haddress + scrolladdr[9:0]) > 640 && (haddress + scrolladdr[9:0]) < 667)begin
                             layer[1] <= cactus2[vaddress-203][haddress-640+scrolladdr[9:0]];
                         end
                     end
                 end
-                if(select[1])begin
-                    if(type[1])begin
-                        if((haddress + scrolladdr[9:0]-250) > 640 && (haddress + scrolladdr[9:0]-250) < 667)begin //Cactus test
+                if(select[1])begin //Check if its valid to print the second cacti
+                    if(type[1])begin //Check whether to print cacti or not
+                        if((haddress + scrolladdr[9:0]-250) > 640 && (haddress + scrolladdr[9:0]-250) < 667)begin
                             layer[3] <= cactus2[vaddress-203][haddress-640+scrolladdr[9:0]-250];
                         end
                     end
                 end
-                if(select[2])begin
-                    if(type[2])begin
-                        if((haddress + scrolladdr[10:0]-450) > 640 && (haddress + scrolladdr[10:0]-450) < 667)begin //Cactus test
+                if(select[2])begin //Check if its valid to print the third cacti
+                    if(type[2])begin //Check which cacti to print
+                        if((haddress + scrolladdr[10:0]-450) > 640 && (haddress + scrolladdr[10:0]-450) < 667)begin
                             layer[4] <= cactus1[vaddress-203][haddress-640+scrolladdr[10:0]-450];
                         end
                     end
                     else begin
-                        if((haddress + scrolladdr[10:0]-450) > 640 && (haddress + scrolladdr[10:0]-450) < 667)begin //Cactus test
+                        if((haddress + scrolladdr[10:0]-450) > 640 && (haddress + scrolladdr[10:0]-450) < 667)begin
                             layer[4] <= cactus3[vaddress-203][haddress-640+scrolladdr[10:0]-450];
                         end
                     end
@@ -147,13 +147,13 @@ module top(
             if(scrolladdr[9:0]==450)begin
                 select[2] <= 1;
             end
-            if(scrolladdr[9:0] > 667)begin
+            if(scrolladdr[9:0] == 667)begin
                 select[0] <= 0;
             end
-            if(scrolladdr[9:0] > 917)begin
+            if(scrolladdr[9:0] == 917)begin
                 select[1] <= 0;
             end
-            if(scrolladdr[10:0] > 1117)begin
+            if(scrolladdr[10:0] == 1117)begin
                 select[2] <= 0;
             end
         end //End of valid scan area

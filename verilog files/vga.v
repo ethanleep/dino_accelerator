@@ -1,5 +1,7 @@
 `timescale 1ns / 1ps
 
+//This script is responsible for generating the vertical and horizontal addresses and timing pulses
+
 module vga(
     input clk,
     output reg [9:0] vaddress,haddress,
@@ -14,9 +16,8 @@ module vga(
         haddress <= 9'b0;
     end
     
-    //Main block
+    //Main block, generates vertical and horizontal addresses and timing pulses
     always@(posedge clk)begin
-        //Reset hsync and increment horizontal address
         hsync <= 1'b1;
         haddress <= haddress + 1;
         if(haddress >= 656 && haddress < 752)begin //Generate horizontal sync pulse

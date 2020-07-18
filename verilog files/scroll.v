@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-//This script is responsible for generating the scroll x position for the cactus and floor movement
+//This script is responsible for generating the x position for the cactus and floor movement
 
 module scroll(
     input clk,halt,reset,
@@ -14,10 +14,10 @@ module scroll(
     initial begin
         millisecond <= 0;
         pos <= 0;
-        increment <= 18'd251250;
+        increment <= 18'd251250; //Starting increment of 251250 clock pulses
     end
     
-    //Main block, increments the x position value by 1 every 5 milliseconds
+    //Main block, slowly increases horizontal speed over time
     always@(posedge clk)begin
         if(reset == 1)begin
             pos <= 0;
